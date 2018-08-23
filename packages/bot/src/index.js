@@ -60,10 +60,14 @@ server.get('/token-generate', async (_, res) => {
       method: 'POST'
     });
 
-    res.send(await cres.json());
-  } catch (err) {
-    console.log(err);
+    const json = cres.json();
 
+    if ('error' in json) {
+      res.send(500);
+    } else {
+      res.send(json);
+    }
+  } catch (err) {
     res.send(500);
   }
 });
@@ -79,10 +83,14 @@ server.get('/token-refresh/:token', async (req, res) => {
       method: 'POST'
     });
 
-    res.send(await cres.json());
-  } catch (err) {
-    console.log(err);
+    const json = cres.json();
 
+    if ('error' in json) {
+      res.send(500);
+    } else {
+      res.send(json);
+    }
+  } catch (err) {
     res.send(500);
   }
 });
@@ -91,8 +99,6 @@ server.get('/token-refresh/:token', async (req, res) => {
 server.post('/api/messages/', (req, res) => {
   adapter.processActivity(req, res, async context => {
     numActivities++;
-
-    console.log(context.activity);
 
     // On "conversationUpdate"-type activities this bot will send a greeting message to users joining the conversation.
     if (
