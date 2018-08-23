@@ -112,7 +112,7 @@ server.post('/api/messages/', (req, res) => {
       context.activity.type === 'conversationUpdate'
       && context.activity.membersAdded[0].name === 'webchat-samples-preservehistory'
     ) {
-      await context.sendActivity(`Welcome to the historian bot!`);
+      await context.sendActivity(`Welcome to the Historian Bot!`);
     } else if (context.activity.type === 'message') {
       await context.sendActivity(`Echo: \`${ context.activity.text }\``);
     }
