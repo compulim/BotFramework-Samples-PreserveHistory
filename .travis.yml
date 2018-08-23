@@ -6,7 +6,7 @@ services:
 - docker
 
 install:
-- docker build -t webchat.azurecr.io/preserve-history .
+- docker build -t webchat.azurecr.io/samples-preserve-history .
 
 script:
 - echo
