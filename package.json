@@ -3,18 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "packages/bot/lib/index.js",
-  "private": "true",
+  "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "npm run build:bot && npm run build:web",
     "build:bot": "cd packages && cd bot && npm run build",
     "build:web": "cd packages && cd web && npm run build",
-    "postinstall": "npm run bootstrap && npm run build",
     "test": "echo \"Warning: no test specified\""
   },
   "author": "William Wong <compulim@hotmail.com> (http://compulim.info/)",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "lerna": "^3.1.4"
   }
 }

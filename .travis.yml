@@ -1,0 +1,21 @@
+sudo: required
+
+language: node_js
+
+services:
+- docker
+
+before_install:
+- docker build -t webchat/preserve-history
+
+install:
+- echo
+
+script:
+- echo
+
+deploy:
+  provider: script
+  script: bash scripts/docker_push
+  on:
+    branch: master
