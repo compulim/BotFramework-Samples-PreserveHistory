@@ -26,6 +26,13 @@ const adapter = new BotFrameworkAdapter({
 let numActivities = 0;
 const up = Date.now();
 
+server.get('/*', async (req, res) => {
+  await serveHandler(req, res, {
+    directoryListing: ['/**'],
+    public: join('../web/build')
+  });
+});
+
 server.get('/health.txt', async (req, res) => {
   res.set('Content-Type', 'text/plain');
   res.send('OK');
@@ -49,7 +56,7 @@ server.get('/ready.txt', async (req, res) => {
   }, null, 2));
 });
 
-server.get('/token-generate', async (_, res) => {
+server.post('/token-generate', async (_, res) => {
   console.log('requesting token');
 
   try {
@@ -60,7 +67,7 @@ server.get('/token-generate', async (_, res) => {
       method: 'POST'
     });
 
-    const json = cres.json();
+    const json = await cres.json();
 
     if ('error' in json) {
       res.send(500);
@@ -72,7 +79,7 @@ server.get('/token-generate', async (_, res) => {
   }
 });
 
-server.get('/token-refresh/:token', async (req, res) => {
+server.post('/token-refresh/:token', async (req, res) => {
   console.log('refreshing token');
 
   try {
@@ -83,7 +90,7 @@ server.get('/token-refresh/:token', async (req, res) => {
       method: 'POST'
     });
 
-    const json = cres.json();
+    const json = await cres.json();
 
     if ('error' in json) {
       res.send(500);

@@ -26,7 +26,7 @@ export default class extends React.Component {
   }
 
   async generateToken() {
-    const res = await fetch('/token-generate');
+    const res = await fetch('/token-generate', { method: 'POST' });
     const { token } = await res.json();
 
     this.setState(() => ({ token }));
